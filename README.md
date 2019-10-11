@@ -51,6 +51,6 @@ jobs:
 
 ## References
 
-[GKE documentation](https://cloud.google.com/kubernetes-engine/docs/quickstart)
-[Helm documentation](https://helm.sh/)
-[GitHub Actions documentation](https://help.github.com/en/categories/automating-your-workflow-with-github-actions)
+- [GKE documentation](https://cloud.google.com/kubernetes-engine/docs/quickstart)
+- [Helm documentation](https://helm.sh/)
+- [GitHub Actions documentation](https://help.github.com/en/categories/automating-your-workflow-with-github-actions)
