@@ -1,0 +1,30 @@
+name: release_master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  login_to_registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+        env:
+          DOCKER_HUB_USERNAME: ${{secrets.docker-hub-username}}
+          DOCKER_HUB_PASSWORD: ${{secrets.docker-hub-password}}
+  build_image:
+    runs-on: ubuntu-latest
+    steps:
+      - run: docker build -t $GITHUB_REPOSITORY:latest .
+  publish-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+        env:
+          DOCKER_HUB_USERNAME: ${{secrets.docker-hub-username}}
+          DOCKER_HUB_PASSWORD: ${{secrets.docker-hub-password}}
+      - run: docker build -t $GITHUB_REPOSITORY:latest .
+      - run: docker push $GITHUB_REPOSITORY:latest
